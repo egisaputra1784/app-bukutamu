@@ -58,7 +58,7 @@ if (isset($_POST['simpan'])) {
                             <td><?= $no++; ?></td>
                             <td><?= $user['username']?></td>
                             <td><?= $user['user_role']?></td>
-                            <td><a class="btn btn-success" href="tambah-user.php?id=<?= $user['id_users']?>">Ubah</a>
+                            <td><a class="btn btn-success" href="edit-users.php?id=<?= $user['id_users']?>">Ubah</a>
                                 <a onclick="confirm('Apakah anda yakin ingin menghapus data user?')" class="btn btn-danger"  href="hapus-user.php?id=<?= $user['id_users']?>">Hapus</a>
                         </tr>
                         <?php endforeach;?>
@@ -79,7 +79,7 @@ if (isset($_POST['simpan'])) {
   $urutan++;
 
   $huruf = "usr";
-  $kodeuser = $huruf . sprintf("%03s", $urutan);
+  $kodeuser = $huruf . sprintf("%02s", $urutan);
 
 ?>
 
@@ -89,14 +89,14 @@ if (isset($_POST['simpan'])) {
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="tambahModalLabel">Ubah data user</h5>
+        <h5 class="modal-title" id="tambahModalLabel">Tambah data user</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <form method="post" action="">
-          <input type="hidden" name="id_user" id="id_user" value="<?= $kodeUser ?>">
+          <input type="text" name="id_user" id="id_user" value="<?= $kodeuser ?>">
           <div class="form-group row">
             <label for="username" class="col-sm-3 col-form-label">Username</label>
             <div class="col-sm-8">
