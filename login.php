@@ -17,7 +17,7 @@ if (isset($_POST['login'])) {
     // cek apakah ada username
     if (mysqli_num_rows($result) === 1) {
 
-        // cek apakah passwordnya benar
+        // cek apakah passwordn           ya benar
         $row = mysqli_fetch_assoc($result);
 
         if (password_verify($password, $row['password'])) {

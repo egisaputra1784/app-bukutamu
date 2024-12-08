@@ -4,18 +4,17 @@ require_once('function.php');
 ?>
 <?php
 if (isset($_SESSION['role']) && $_SESSION['role'] != 'operator') {
-  echo "<script>alert('Anda tidak memiliki akses!')</script>";
-  echo "<script>window.location.href='index.php'</script>";
+    echo "<script>alert('Anda tidak memiliki akses!')</script>";
+    echo "<script>window.location.href='index.php'</script>";
 }
 
-if(isset($_POST['tampilkan'])){
+if (isset($_POST['tampilkan'])) {
     $p_awal = $_POST['p_awal'];
     $p_akhir = $_POST['p_akhir'];
 
     $link = "export-laporan.php?cari=true&p_awal=$p_awal&p_akhir=$p_akhir";
     $buku_tamu = query("SELECT * FROM `buku tamu` WHERE tanggal BETWEEN  '$p_awal' AND '$p_akhir' ");
-
-}else{
+} else {
     $buku_tamu = query("SELECT * FROM `buku tamu` ORDER BY tanggal DESC");
 }
 ?>
@@ -72,7 +71,7 @@ if(isset($_POST['tampilkan'])){
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="card-header py-3">
-                <a href="<?= isset($_POST['tampilkan']) ? $link : 'export-laporan.php' ; ?>" target="_blank" class="btn
+                <a href="<?= isset($_POST['tampilkan']) ? $link : 'export-laporan.php'; ?>" target="_blank" class="btn
                 btn-success btn-icons-split">
                     <span class="icon text-white-50">
                         <i class="fas fa-file-excel"></i>
@@ -99,25 +98,26 @@ if(isset($_POST['tampilkan'])){
                     </thead>
                     <tbody>
                         <?php
-                            $no = 1;
-                            
-                            foreach ($buku_tamu as $tamu) : ?>
+                        $no = 1;
 
-                                <tr>
-                                    <td><?= $no++; ?></td>
-                                    <td><?= $tamu['tanggal'] ?></td>
-                                    <td><?= $tamu['nama_tamu'] ?></td>
-                                    <td><?= $tamu['alamat'] ?></td>
-                                    <td><?= $tamu['no_hp'] ?></td>
-                                    <td><?= $tamu['bertemu'] ?></td>
-                                    <td><?= $tamu['kepentingan'] ?></td>
-                                    <td>
-                                        <a class="btn btn-success" href="edit-tamu.php?id=<?= $tamu['id_tamu'] ?>">Ubah</a>
-                                        <a onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger" href="hapus-tamu.php?id=<?= $tamu['id_tamu'] ?>">Hapus</a>
-                                    </td>
-                                </tr>
+                        foreach ($buku_tamu as $tamu) : ?>
 
-                            <?php endforeach; ?>
+                            <tr>
+                                <td><?= $no++; ?></td>
+
+                                <td><?= $tamu['tanggal'] ?></td>
+                                <td><?= $tamu['nama_tamu'] ?></td>
+                                <td><?= $tamu['alamat'] ?></td>
+                                <td><?= $tamu['no_hp'] ?></td>
+                                <td><?= $tamu['bertemu'] ?></td>
+                                <td><?= $tamu['kepentingan'] ?></td>
+                                <td>
+                                    <a class="btn btn-success" href="edit-tamu.php?id=<?= $tamu['id_tamu'] ?>">Ubah</a>
+                                    <a onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger" href="hapus-tamu.php?id=<?= $tamu['id_tamu'] ?>">Hapus</a>
+                                </td>
+                            </tr>
+
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
